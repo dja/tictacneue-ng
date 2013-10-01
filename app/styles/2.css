@@ -1,0 +1,23 @@
+header {
+	border-top: 2px solid #068f48;
+}
+a {
+	color: #068f48;
+}
+h1 {
+	color: #068f48;
+}
+.cell {
+	color: #068f48;
+}
+.middle {
+	border-top: 1px solid #068f48;
+	border-bottom: 1px solid #068f48;
+}
+.center {
+	border-left: 1px solid #068f48;
+	border-right: 1px solid #068f48;
+}
+.simplebtn {
+	color: #068f48;
+}

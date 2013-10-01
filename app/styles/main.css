@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+    min-width: 450px;
+}
+#supersized-loader { position:absolute; top:50%; left:50%; z-index:0; width:60px; height:60px; margin:-30px 0 0 -30px; text-indent:-999em;}
+
+#supersized { position:fixed; left:0; top:0; overflow:hidden; z-index:-999; height:100%; width:100%; }
+#supersized img{ width:auto; height:auto; position:relative; outline:none; border:none; }
+    
+#supersized a { z-index:-30; position:fixed; overflow:hidden; top:0; left:0; width:100%; height:100%; background:#111; display:block; }
+header {
+    width: auto;
+    text-align: center;
+    padding-bottom: 10px;
+    margin: 0 auto;
+    border-top: 2px solid #dc145b;
+}
+a {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 80px;
+    color: #dc145b;
+}
+h1 {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 50px;
+    color: #dc145b;
+}
+.menu {
+    position: absolute;
+    margin: 0 auto;
+    width: 450px;
+}
+.container {
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 auto;
+    width: 450px;
+    min-height: 100%;
+    margin-bottom:-40px;
+}
+.container:after {
+    content: "";
+    display:block;
+    height: 40px;
+}
+#gameboard {
+    margin: 0 auto;
+    margin-bottom: 30px;
+    max-width: 300px;
+    visibility: hidden;
+}
+.column {
+    display: inline-block;
+    height: auto;
+    width: 80px;
+    margin: -2px;
+    padding: none;
+}
+.cell {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    text-align: center;
+
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 60px;
+    color: #dc145b;
+}
+.top {
+
+}
+.middle {
+    border-top: 1px solid #dc145b;
+    border-bottom: 1px solid #dc145b;
+}
+.bottom {
+
+}
+.left {
+
+}
+.center {
+    border-left: 1px solid #dc145b;
+    border-right: 1px solid #dc145b;
+}
+.right {
+
+}
+.simplebtn {
+    background: none;
+    border: none;
+    font-size: 40px;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 100;
+    color: #dc145b;
+}
+#start {
+    margin-top: 40px;
+}
+#startgame {
+    text-align: center;
+}
+#playrchooser {
+    margin-top: 35px;
+}
+#playr1 {
+    text-align: center;
+    display: none;
+}
+#playr2 {
+    text-align: center;
+    display: none;
+}
+#playagainbtn {
+    visibility: hidden;
+}
+#fontdetect {
+    display: none;
+    font-size: 1.3em;
+    background-color: rgba(255,255,255,0.5);
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+footer {
+    background-color: rgba(0,0,0,.3);
+    padding: 20px;
+    font-size: 30px;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 100;
+    width: auto;
+    height: 40px;
+}
+footer a:link, footer a:visited, footer a:hover {
+    color: #efefef;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+@media screen and (device-aspect-ratio: 2/3) {
+    #start {
+        margin-top: 30%;
+    }
+    #playrchooser {
+        margin-top: 25%;
+    }
+    #gameboard {
+        margin-top:15%;
+    }
+    .push {
+        height: 20px;
+    }
+    footer {
+        height: 24px;
+    }
+}
+@media screen and (device-aspect-ratio: 40/71) {
+    #start {
+        margin-top: 30%;
+    }
+    #playrchooser {
+        margin-top: 25%;
+    }
+    #gameboard {
+        margin-top:15%;
+    }
+    .push {
+        height: 20px;
+    }
+    footer {
+        height: 24px;
+    }
+}
+@media screen and (device-aspect-ratio: 3/4) {
+    #start {
+        margin-top: 30%;
+    }
+    #playrchooser {
+        margin-top: 25%;
+    }
+    #gameboard {
+        margin-top:15%;
+    }
+    .push {
+        height: 20px;
+    }
+    footer {
+        height: 24px;
+    }
+}
