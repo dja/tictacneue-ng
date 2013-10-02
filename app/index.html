@@ -9,28 +9,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
 <!-- build:css(.tmp) styles/main.css -->
+<link rel="stylesheet" type="text/css" href="styles/normalize.min.css">
 <link rel="stylesheet" href="styles/main.css">
 <!-- endbuild -->
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>TicTacNeue</title>
-<meta name="description" content="A simple game of Tic Tac Toe, with a little iOS7 inspiration. Play a quick game with friends or strangers. In person, it is an awesome conversation starter.">
-
-<meta name="viewport" content="width=450px">
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="apple-mobile-web-app-capable" content="no" />
-<link rel="apple-touch-icon" href="img/touch-icon/touch-icon-iphone.png" />
-<link rel="apple-touch-icon" sizes="76x76" href="img/touch-icon/touch-icon-ipad.png" />
-<link rel="apple-touch-icon" sizes="120x120" href="img/touch-icon/touch-icon-iphone-retina.png" />
-<link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon/touch-icon-ipad-retina.png" />
-
-<link rel="stylesheet" type="text/css" href="styles/normalize.css">
-<link rel="stylesheet" type="text/css" href="styles/normalize.min.css">
-<link rel="stylesheet" type="text/css" href="styles/main.css">
-<script type="text/javascript" src="scripts/controllers/main.js"></script>
-<script type="text/javascript" src="scripts/controllers/fontdetect.js"></script>
-<!-- <script type="text/javascript" src="http://fast.fonts.net/jsapi/8611331d-6a62-4a8b-9cd8-1719224d8c1c.js"></script> -->
-
 <!-- Background Sizing -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/controllers/supersized.core.3.2.1.min.js"></script>
@@ -64,7 +45,34 @@ switch(rand_style_no)
     break;
   }
 
+$(document).ready(function() {
+ 
+ var docHeight = $(document).height();
+ var footerHeight = $('#footer').height();
+ var footerTop = $('#footer').position().top + footerHeight;
+ 
+ if (footerTop < docHeight) {
+  $('#footer').css('margin-top', (docHeight/2.2 - footerTop)  + 'px');
+ }
+});
+
+
 </script>
+<script type="text/javascript" src="scripts/controllers/fontdetect.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>TicTacNeue</title>
+<meta name="description" content="A simple game of Tic Tac Toe, with a little iOS7 inspiration. Play a quick game with friends or strangers. In person, it is an awesome conversation starter.">
+
+<meta name="viewport" content="width=450px">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-capable" content="no" />
+<link rel="apple-touch-icon" href="img/touch-icon/touch-icon-iphone.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="img/touch-icon/touch-icon-ipad.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="img/touch-icon/touch-icon-iphone-retina.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon/touch-icon-ipad-retina.png" />
+
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -88,7 +96,11 @@ switch(rand_style_no)
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-view=""></div>
+    <header>
+    <h1>TicTacNeue</h1>
+    </header>
+
+    <div class="container" ng-view=""></div>
 
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -104,7 +116,8 @@ switch(rand_style_no)
         <script src="scripts/controllers/main.js"></script>
         <!-- endbuild -->
 
-<footer>
+
+<footer id="footer">
 <div><a href="http://dja.io" target="_blank">&copy; dja.io</a></div>
 </footer>
 </body>
