@@ -48,8 +48,8 @@ switch(rand_style_no)
 setTimeout( function() {  
 $(document).ready(function() {
  
- var docHeight = $(document).height();
- var footerHeight = $('#footer').height();
+ var docHeight = $(window).height();
+ var footerHeight = $('#footer').height() *2;
  var footerTop = $('#footer').position().top + footerHeight;
  
  if (footerTop < docHeight) {
