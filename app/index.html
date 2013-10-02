@@ -52,7 +52,7 @@ $(document).ready(function() {
  var footerTop = $('#footer').position().top + footerHeight;
  
  if (footerTop < docHeight) {
-  $('#footer').css('margin-top', (docHeight/2.2 - footerTop)  + 'px');
+  $('#footer').css('margin-top', (docHeight - footerTop)  + 'px');
  }
 });
 
