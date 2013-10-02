@@ -1,5 +1,4 @@
 'use strict';
-
 var turn = 1;
 var playedCells = 0;
 var alreadyWon = false;
@@ -140,8 +139,3 @@ function EvalSound(soundobj){
 	thissound.play(); 
 	setTimeout( function() { window.location.reload(); }, 1600);
 }
-
-
-
-
-

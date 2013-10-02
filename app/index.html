@@ -45,6 +45,7 @@ switch(rand_style_no)
     break;
   }
 
+setTimeout( function() {  
 $(document).ready(function() {
  
  var docHeight = $(document).height();
@@ -55,7 +56,7 @@ $(document).ready(function() {
   $('#footer').css('margin-top', (docHeight - footerTop)  + 'px');
  }
 });
-
+}, 150);
 
 </script>
 <script type="text/javascript" src="scripts/controllers/fontdetect.js"></script>
