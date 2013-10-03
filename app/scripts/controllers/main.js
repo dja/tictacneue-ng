@@ -1,4 +1,6 @@
 'use strict';
+var scene = document.getElementById('scene');
+var parallax = new Parallax(scene);
 var turn = 1;
 var playedCells = 0;
 var alreadyWon = false;
