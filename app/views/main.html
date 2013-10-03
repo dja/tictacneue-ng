@@ -1,29 +1,18 @@
 <div><input type="button" value="Helvetica Neue is not installed. Try Again? &rsaquo;" class="simplebtn" id="fontdetect" onclick="window.location.reload();"></div>
 
 <div class="menu" id="start">
-	<input type="button" value="Start Game &rsaquo;" class="simplebtn" id="startgame" onclick="switchDisplay('startgame', 'playr1'); toggleDisplay('playr2');">
-	</div>
-<div class="menu" id="playrchooser">
-	<input type="button" value="Choose X &rsaquo;" class="simplebtn" id="playr1" onclick="toggleDisplay('playr1'); toggleDisplay('playr2'); toggleVisibility('gameboard'); playBall(1);">
+	<input type="button" id="{{bttns[0].id}}" ng-click="section(2)" ng-class="{'simplebtn': is(1)}" ng-show="is(1)" value="{{bttns[0].label}}" />
+	
+	<input type="button" id="{{bttns[1].id}}" ng-click="section(3)" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[1].label}}" />
 	<br />
-	<input type="button" value="Choose O &rsaquo;" class="simplebtn" id="playr2" onclick="toggleDisplay('playr1'); toggleDisplay('playr2'); toggleVisibility('gameboard'); playBall(2);">
+	<input type="button" id="{{bttns[2].id}}" ng-click="section(3)" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[2].label}}" />
 </div>
 
-<div id="gameboard">
-	<div class="column" onclick="playIt();">
-		<div class="cell top left" id="cell0_0">&nbsp;</div>
-		<div class="cell middle left" id="cell1_0">&nbsp;</div>
-		<div class="cell bottom left" id="cell2_0">&nbsp;</div>
-	</div>
-	<div class="column" onclick="playIt();">
-		<div class="cell top center" id="cell0_1">&nbsp;</div>
-		<div class="cell middle center" id="cell1_1">&nbsp;</div>
-		<div class="cell bottom center" id="cell2_1">&nbsp;</div>
-	</div>
-	<div class="column" onclick="playIt();">
-		<div class="cell top right" id="cell0_2">&nbsp;</div>
-		<div class="cell middle right" id="cell1_2">&nbsp;</div>
-		<div class="cell bottom right" id="cell2_2">&nbsp;</div>
+<div id="{'gameboard': is(3)}" ng-show="is(3)">
+	<div class="column" id="{{'col' + ($index + 1)}}" ng-repeat="column in gamex">
+		<div class="cell" id="{{'row' + ($index + 1)}}" ng-repeat="cell in column" style="margin: 1px;" ng-click="playCell()">
+		{{cell}}
+		</div>
 	</div>
 </div>
 <div>
@@ -31,5 +20,5 @@
 	    <audio id="playagain" src="sounds/playagain.mp3" controls preload="auto" autobuffer></audio>
 	</div>
 
-	<input type="button" value="Play Again &rsaquo;" class="simplebtn" id="playagainbtn" onclick="EvalSound('playagain')">
+	<input type="button" class="{'simplebtn': is(4)}" ng-show="is(4)" value="Play Again &rsaquo;" id="playagainbtn" onclick="EvalSound('playagain')">
 </div>

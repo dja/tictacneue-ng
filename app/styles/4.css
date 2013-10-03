@@ -10,14 +10,22 @@ h1 {
 .cell {
 	color: #df0a0a;
 }
-.middle {
-	border-top: 1px solid #df0a0a;
-	border-bottom: 1px solid #df0a0a;
-}
-.center {
-	border-left: 1px solid #df0a0a;
-	border-right: 1px solid #df0a0a;
-}
 .simplebtn {
 	color: #df0a0a;
+}
+#col1 {
+    border-right: 1px solid #df0a0a;
+}
+#col2 {
+    border-right: 1px solid #df0a0a;
+}
+#col3 {
+}
+#row1 {
+    border-bottom: 1px solid #df0a0a;
+}
+#row2 {
+    border-bottom: 1px solid #df0a0a;
+}
+#row3 {
 }

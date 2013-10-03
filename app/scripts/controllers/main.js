@@ -3,6 +3,7 @@ var turn = 1;
 var playedCells = 0;
 var alreadyWon = false;
 
+// Font Detection for Helvetica Neue
 function detectHelv(){
 	var d = new Detector();
 	if(d.detect('Helvetica Neue') == false){
@@ -12,12 +13,12 @@ function detectHelv(){
 	}
 }
 
+// Setting Player as X or O
 function playBall(numPlayr){
 	turn = numPlayr;
-	document.getElementById('start').style.display = 'none';
-	document.getElementById('playrchooser').style.display = 'none';
 }
 
+// Shake to Reload on iPhone
 if (typeof window.DeviceMotionEvent != 'undefined') {
     // Shake sensitivity (a lower number is more)
     var sensitivity = 50;
@@ -51,6 +52,7 @@ if (typeof window.DeviceMotionEvent != 'undefined') {
     }, 150);
 }
 
+// Fill Cells with X or O
 function playIt(){
 	if (alreadyWon == false && event.target.className.split(" ")[3] != "played") {
 		if (turn % 2 != 0) {
@@ -71,6 +73,7 @@ function playIt(){
 	}
 }
 
+// Check for Win Conditions
 function navCells(){
 	var cellArray = [ [null, null, null], [null, null, null], [null, null, null] ];
 	for(c=0;c<=2;++c){
@@ -134,6 +137,7 @@ function toggleDisplay(id){
 	}
 }
 
+// Play Sound on Click
 function EvalSound(soundobj){
 	var thissound=document.getElementById(soundobj);
 	thissound.play(); 

@@ -2,6 +2,7 @@
     margin: 0;
 }
 html, body {
+    height: 100%;
     min-width: 450px;
 }
 #supersized-loader { position:absolute; top:50%; left:50%; z-index:0; width:60px; height:60px; margin:-30px 0 0 -30px; text-indent:-999em;}
@@ -44,14 +45,30 @@ h1 {
     margin: 0 auto;
     margin-bottom: 30px;
     max-width: 300px;
-    visibility: hidden;
 }
 .column {
     display: inline-block;
     height: auto;
     width: 80px;
-    margin: -2px;
     padding: none;
+}
+#col1 {
+    border-right: 1px solid #dc145b;
+}
+#col2 {
+    border-right: 1px solid #dc145b;
+    margin-left: -1px;
+}
+#col3 {
+    margin-left: -1px;
+}
+#row1 {
+    border-bottom: 1px solid #dc145b;
+}
+#row2 {
+    border-bottom: 1px solid #dc145b;
+}
+#row3 {
 }
 .cell {
     width: 80px;
@@ -64,26 +81,6 @@ h1 {
     font-weight: 100;
     font-size: 60px;
     color: #dc145b;
-}
-.top {
-
-}
-.middle {
-    border-top: 1px solid #dc145b;
-    border-bottom: 1px solid #dc145b;
-}
-.bottom {
-
-}
-.left {
-
-}
-.center {
-    border-left: 1px solid #dc145b;
-    border-right: 1px solid #dc145b;
-}
-.right {
-
 }
 .simplebtn {
     background: none;
@@ -104,14 +101,11 @@ h1 {
 }
 #playr1 {
     text-align: center;
-    display: none;
 }
 #playr2 {
     text-align: center;
-    display: none;
 }
 #playagainbtn {
-    visibility: hidden;
 }
 #fontdetect {
     display: none;
@@ -119,16 +113,18 @@ h1 {
     background-color: rgba(255,255,255,0.5);
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
-#footer {
+footer {
     background-color: rgba(0,0,0,.3);
     padding: 20px;
     font-size: 30px;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
     font-weight: 100;
-    width: auto;
+    width: 100%;
     height: 40px;
+    bottom: 0;
+    position: fixed;
 }
-#footer a:link, #footer a:visited, #footer a:hover {
+footer a:link, footer a:visited, footer a:hover {
     color: #efefef;
     font-size: 30px;
     text-decoration: none;
