@@ -1,6 +1,13 @@
 'use strict';
 var scene = document.getElementById('scene');
 var parallax = new Parallax(scene);
+parallax.enable();
+parallax.disable();
+parallax.calibrate(false, true);
+parallax.invert(false, true);
+parallax.limit(false, 10);
+parallax.scalar(2, 8);
+parallax.friction(0.2, 0.8);
 var turn = 1;
 var playedCells = 0;
 var alreadyWon = false;
