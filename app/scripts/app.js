@@ -26,8 +26,35 @@ function GameCtrl($scope) {
     id: 'playr2'
   }];
 
+  var turn = 1;
+  var playedCells = 0;
+  var alreadyWon = false;
+
+  // Setting Player as X or O
+  $scope.playBall = function(numPlayr){
+    turn = numPlayr;
+  }
+
   $scope.playCell = function(col, row){
-    $scope.gamex[col][row] = 'X';
+    if (alreadyWon == false && event.target.className.split(" ")[1] != "played") {
+      if (turn % 2 != 0) {
+        this.gamex[col][row] = 'X';
+        event.target.classList.add('played');
+        playedCells++;
+        event.target.innerHTML = "X";
+      }
+      else {
+        this.gamex[col][row] = 'O';
+        event.target.classList.add('played');
+        playedCells++;
+        event.target.innerHTML = "O";
+      }
+      turn++;
+      navCells();
+    }
+    else {
+      console.log('Nice try, punk');
+    }
   }
 
   $scope.navCells = function(){
