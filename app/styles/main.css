@@ -41,6 +41,9 @@ h1 {
     margin: 0 auto;
     width: 450px;
 }
+.clearfix {
+    clear: both;
+}
 #gameboard {
     margin: 0 auto;
     margin-bottom: 30px;
@@ -48,7 +51,6 @@ h1 {
 }
 .column {
     display: inline-block;
-    height: auto;
     width: 80px;
     padding: none;
 }
@@ -57,10 +59,8 @@ h1 {
 }
 #col2 {
     border-right: 1px solid #dc145b;
-    margin-left: -1px;
 }
 #col3 {
-    margin-left: -1px;
 }
 #row1 {
     border-bottom: 1px solid #dc145b;

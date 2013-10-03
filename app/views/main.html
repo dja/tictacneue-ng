@@ -3,16 +3,16 @@
 <div class="menu" id="start">
 	<input type="button" id="{{bttns[0].id}}" ng-click="section(2)" ng-class="{'simplebtn': is(1)}" ng-show="is(1)" value="{{bttns[0].label}}" />
 	
-	<input type="button" id="{{bttns[1].id}}" ng-click="section(3)" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[1].label}}" />
+	<input type="button" id="{{bttns[1].id}}" ng-click="section(3); playBall(1);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[1].label}}" />
 	<br />
-	<input type="button" id="{{bttns[2].id}}" ng-click="section(3)" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[2].label}}" />
+	<input type="button" id="{{bttns[2].id}}" ng-click="section(3); playBall(2);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[2].label}}" />
 </div>
 
 <div id="{'gameboard': is(3)}" ng-show="is(3)">
 	<div class="column" id="{{'col' + ($index + 1)}}" ng-repeat="column in gamex">
-		<div class="cell" id="{{'row' + ($index + 1)}}" ng-repeat="cell in column" style="margin: 1px;" ng-click="playCell($parent.$index, $index)">
-		{{gamex[$parent.$index][$index]}}
+		<div class="cell" id="{{'row' + ($index + 1)}}" ng-repeat="cell in column" ng-click="playCell($parent.$index, $index)">{{gamex[$parent.$index][$index]}}
 		</div>
+		<div class="clearfix"></div>
 	</div>
 </div>
 <div>

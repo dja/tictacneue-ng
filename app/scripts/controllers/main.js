@@ -75,13 +75,7 @@ function playIt(){
 
 // Check for Win Conditions
 function navCells(){
-	var cellArray = [ [null, null, null], [null, null, null], [null, null, null] ];
-	for(c=0;c<=2;++c){
-		for(r=0;r<=2;++r){
-			cellArray[c][r] = document.getElementById("cell"+c+"_"+r).innerHTML;
-		}
-	}
-	for(x=0; x<=2; ++x){
+	for(var x=0; x<=2; ++x){
 		if(cellArray[0][x] == cellArray[1][x] && cellArray[1][x] == cellArray[2][x] && cellArray[0][x] != "&nbsp;"){
 			alreadyWon = true;
 			alert(cellArray[0][x] + " WON!");
@@ -103,7 +97,7 @@ function navCells(){
 		alert(cellArray[2][0] + " WON!");
 		toggleVisibility('playagainbtn');
 	}
-	else if(playedCells == 9 && alreadyWon != true){
+	else if(turn == 10 && alreadyWon != true){
 		alert("No one won.");
 		toggleVisibility('playagainbtn');
 	}
