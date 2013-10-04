@@ -35,6 +35,7 @@ function GameCtrl($scope) {
   }];
 
   var turn = 1;
+  var playedCells = 0;
   var alreadyWon = false;
 
 // Font Detection for Helvetica Neue
@@ -54,41 +55,38 @@ $scope.detectHelv = function(){
     if (alreadyWon == false && this.cell.value != 'X' && this.cell.value != 'O') {
       if (turn % 2 != 0) {
         turn++;
+        playedCells++;
         this.cell.value = 'X';
       }
       else {
         turn++;
+        playedCells++;
         this.cell.value = 'O';
       }
 // Win Conditions
       for(x=0; x<=2; ++x){
-        if(this.gamex[0][x].value == this.gamex[1][x].value && this.gamex[1][x].value == this.gamex[2][x].value && this.cell.value != null){
-          alert('1');
+        if(this.cell.value == this.gamex[0][x].value && this.cell.value == this.gamex[1][x].value && this.cell.value == this.gamex[2][x].value && this.cell.value != null){
           alreadyWon = true;
           alert(this.cell.value + " WON!");
         this.section(4);
         }
-        if(this.gamex[x][0].value == this.gamex[x][1].value && this.gamex[x][1].value == this.gamex[x][2].value && this.cell.value != null){
-          alert('2');
+        if(this.cell.value == this.gamex[x][0].value && this.cell.value == this.gamex[x][1].value && this.cell.value == this.gamex[x][2].value && this.cell.value != null){
           alreadyWon = true;
           alert(this.cell.value + " WON!");
         this.section(4);
         }
       }
-      if(this.gamex[0][0].value == this.gamex[1][1].value && this.gamex[1][1].value == this.gamex[2][2].value && this.cell.value != null ){
-          alert('3');
+      if(this.cell.value == this.gamex[2][0].value && this.cell.value == this.gamex[1][1].value && this.cell.value == this.gamex[0][2].value && this.cell.value != null ){
         alreadyWon = true;
         alert(this.cell.value + " WON!");
         this.section(4);
       }
-      if(this.gamex[2][0].value == this.gamex[1][1].value && this.gamex[1][1].value == this.gamex[0][2].value && this.cell.value != null ){
-          alert('4');
+      if(this.cell.value == this.gamex[0][0].value && this.cell.value == this.gamex[1][1].value && this.cell.value == this.gamex[2][2].value && this.cell.value != null ){
         alreadyWon = true;
         alert(this.cell.value + " WON!");
         this.section(4);
       }
-      else if(alreadyWon == false){
-          alert('5');
+      else if(alreadyWon == false && playedCells == 9){
         alert("No one won.");
         this.section(4);
       }
@@ -96,7 +94,8 @@ $scope.detectHelv = function(){
     else {
       console.log('Nice try, punk');
     }
-    // Shake to Reload on iPhone
+
+// Shake to Reload on iPhone
     if (typeof window.DeviceMotionEvent != 'undefined') {
         // Shake sensitivity (a lower number is more)
         var sensitivity = 50;
@@ -141,6 +140,7 @@ $scope.detectHelv = function(){
       return section == id;
   };
 
+// Reset Game
   $scope.resetGame = function(){
     // Resets game board
     for (var a = 0; a <= this.gamex.length - 1; a++) {
