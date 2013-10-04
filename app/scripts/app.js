@@ -36,7 +36,7 @@ function GameCtrl($scope) {
 
   $scope.playCell = function(col, row){
     alert('playing' + col + " " + row);
-    if (alreadyWon == false && event.target.className.split(" ")[2] != "played") {
+    if (alreadyWon == false && event.target.className.split(" ")[3] != "played") {
       if (turn % 2 != 0) {
         // event.target.innerHTML = "X";
         turn++;
