@@ -36,15 +36,14 @@ function GameCtrl($scope) {
 
   $scope.playCell = function(row, col){
     alert('playing' + row + " " + col);
-    if (alreadyWon == false && event.target.className.split(" ")[2] != "played") {
+    if (alreadyWon == false && this.gamex[row][col] != 'X' && this.gamex[row][col] != 'O') {
+      alert('if statement');
       if (turn % 2 != 0) {
         turn++;
-        event.target.classList.add('played');
         this.gamex[row][col] = 'X';
       }
       else {
         turn++;
-        event.target.classList.add('played');
         this.gamex[row][col] = 'O';
       }
     }
