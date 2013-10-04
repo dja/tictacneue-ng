@@ -10,7 +10,7 @@
 
 <div id="gameboard" ng-show="is(3) || is(4) ">
 	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in gamex">
-		<div class="cell" id="{{'col' + ($index + 1)}}" ng-repeat="cell in row" ng-click="playCell($parent.$index, $index)">{{gamex[$parent.$index][$index]}}
+		<div class="cell" id="{{'col' + ($index + 1)}}" ng-repeat="cell in row" ng-bind="cell.value" ng-click="playCell(cell)">
 		</div>
 		<div class="clearfix"></div>
 	</div>

@@ -13,7 +13,9 @@ angular.module('newTicApp', [])
   });
 
 function GameCtrl($scope) {
-  $scope.gamex = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
+  $scope.gamex = [[{ value: ' '}, { value: ' '}, { value: ' '}],
+                  [{ value: ' '}, { value: ' '}, { value: ' '}],
+                  [{ value: ' '}, { value: ' '}, { value: ' '}]];
 
   $scope.bttns = [{
     label: "Start Game ›",
@@ -48,42 +50,48 @@ $scope.detectHelv = function(){
     turn = numPlayr;
   }
 
-  $scope.playCell = function(row, col){
-    if (alreadyWon == false && this.gamex[row][col] != 'X' && this.gamex[row][col] != 'O') {
+  $scope.playCell = function(cell){
+    if (alreadyWon == false && this.cell.value != 'X' && this.cell.value != 'O') {
       if (turn % 2 != 0) {
         turn++;
-        this.gamex[row][col] = 'X';
+        this.cell.value = 'X';
       }
       else {
         turn++;
-        this.gamex[row][col] = 'O';
+        this.cell.value = 'O';
       }
-      // Win Conditions
-      if(this.gamex[0][col] == this.gamex[1][col] && this.gamex[1][col] == this.gamex[2][col] && this.gamex[0][col] != null){
+// Win Conditions
+      for(x=0; x<=2; ++x){
+        if(this.gamex[0][x].value == this.gamex[1][x].value && this.gamex[1][x].value == this.gamex[2][x].value && this.cell.value != null){
+          alert('1');
+          alreadyWon = true;
+          alert(this.cell.value + " WON!");
+        this.section(4);
+        }
+        if(this.gamex[x][0].value == this.gamex[x][1].value && this.gamex[x][1].value == this.gamex[x][2].value && this.cell.value != null){
+          alert('2');
+          alreadyWon = true;
+          alert(this.cell.value + " WON!");
+        this.section(4);
+        }
+      }
+      if(this.gamex[0][0].value == this.gamex[1][1].value && this.gamex[1][1].value == this.gamex[2][2].value && this.cell.value != null ){
+          alert('3');
         alreadyWon = true;
-        alert(this.gamex[0][col] + " WON!");
+        alert(this.cell.value + " WON!");
         this.section(4);
       }
-      if(this.gamex[row][0] == this.gamex[row][1] && this.gamex[row][1] == this.gamex[row][2] && this.gamex[row][0] != null){
+      if(this.gamex[2][0].value == this.gamex[1][1].value && this.gamex[1][1].value == this.gamex[0][2].value && this.cell.value != null ){
+          alert('4');
         alreadyWon = true;
-        alert(this.gamex[row][0] + " WON!");
+        alert(this.cell.value + " WON!");
         this.section(4);
       }
-      if(this.gamex[0][0] == this.gamex[1][1] && this.gamex[1][1] == this.gamex[2][2] && this.gamex[0][0] != null ){
-        alreadyWon = true;
-        alert(this.gamex[0][0] + " WON!");
-        this.section(4);
-      }
-      if(this.gamex[2][0] == this.gamex[1][1] && this.gamex[1][1] == this.gamex[0][2] && this.gamex[2][0] != null ){
-        alreadyWon = true;
-        alert(this.gamex[2][0] + " WON!");
-        this.section(4);
-      }
-      else if(alreadyWon == false && this.gamex[row][col] != 'X' && this.gamex[row][col] != 'O'){
+      else if(alreadyWon == false){
+          alert('5');
         alert("No one won.");
         this.section(4);
       }
-
     }
     else {
       console.log('Nice try, punk');
@@ -122,12 +130,6 @@ $scope.detectHelv = function(){
         }, 150);
     }
 }
-
-
-
-
-
-
   // Switch views between hidden and visible elements
   var section = 1;
   
@@ -143,11 +145,12 @@ $scope.detectHelv = function(){
     // Resets game board
     for (var a = 0; a <= this.gamex.length - 1; a++) {
       for (var b = 0; b <= this.gamex.length - 1; b++) {
-      this.gamex[a][b] = null;
+        this.gamex[a][b].value = ' ';
       };
-    }
+    };
+
     this.section(2);
-    this.turn = 0;
-    this.alreadyWon = false;
+    turn = 0;
+    alreadyWon = false;
   }
 }
