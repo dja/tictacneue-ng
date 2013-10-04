@@ -24,9 +24,13 @@ function GameCtrl($scope) {
   }, {
     label: "Choose O ›",
     id: 'playr2'
+  }, {
+    label: "Play Again ›",
+    id: 'playagainbtn'
   }];
 
   var turn = 1;
+  var playedCells = 0;
   var alreadyWon = false;
 
   // Setting Player as X or O
@@ -35,57 +39,50 @@ function GameCtrl($scope) {
   }
 
   $scope.playCell = function(row, col){
-    alert('playing' + row + " " + col);
     if (alreadyWon == false && this.gamex[row][col] != 'X' && this.gamex[row][col] != 'O') {
-      alert('if statement');
       if (turn % 2 != 0) {
         turn++;
+        playedCells++;
         this.gamex[row][col] = 'X';
       }
       else {
         turn++;
+        playedCells++;
         this.gamex[row][col] = 'O';
       }
+  if(this.gamex[0][col] == this.gamex[1][col] && this.gamex[1][col] == this.gamex[2][col] && this.gamex[0][col] != null){
+    alreadyWon = true;
+    alert(this.gamex[0][col] + " WON!");
+    this.section(4);
+  }
+  if(this.gamex[row][0] == this.gamex[row][1] && this.gamex[row][1] == this.gamex[row][2] && this.gamex[row][0] != null){
+    alreadyWon = true;
+    alert(this.gamex[x][0] + " WON!");
+    this.section(4);
+  }
+  if(this.gamex[0][0] == this.gamex[1][1] && this.gamex[1][1] == this.gamex[2][2] && this.gamex[0][0] != null ){
+    alreadyWon = true;
+    alert(this.gamex[0][0] + " WON!");
+    this.section(4);
+  }
+  if(this.gamex[2][0] == this.gamex[1][1] && this.gamex[1][1] == this.gamex[0][2] && this.gamex[2][0] != null ){
+    alreadyWon = true;
+    alert(this.gamex[2][0] + " WON!");
+    this.section(4);
+  }
+  else if(playedCells == 9 && alreadyWon != true){
+    alert("No one won.");
+    this.section(4);
+  }
+
+
+
+
     }
     else {
       console.log('Nice try, punk');
     }
-  }
-
-  $scope.navCells = function(){
-    for(c=0;c<=2;++c){
-      for(r=0;r<=2;++r){
-        cellArray[c][r] = document.getElementById("cell"+c+"_"+r).innerHTML;
-      }
-    }
-    for(x=0; x<=2; ++x){
-      if(cellArray[0][x] == cellArray[1][x] && cellArray[1][x] == cellArray[2][x] && cellArray[0][x] != "&nbsp;"){
-        alreadyWon = true;
-        alert(cellArray[0][x] + " WON!");
-        toggleVisibility('playagainbtn');
-      }
-      if(cellArray[x][0] == cellArray[x][1] && cellArray[x][1] == cellArray[x][2] && cellArray[x][0] != "&nbsp;"){
-        alreadyWon = true;
-        alert(cellArray[x][0] + " WON!");
-        toggleVisibility('playagainbtn');
-      }
-    }
-    if(cellArray[0][0] == cellArray[1][1] && cellArray[1][1] == cellArray[2][2] && cellArray[0][0] != "&nbsp;" ){
-      alreadyWon = true;
-      alert(cellArray[0][0] + " WON!");
-      toggleVisibility('playagainbtn');
-    }
-    if(cellArray[2][0] == cellArray[1][1] && cellArray[1][1] == cellArray[0][2] && cellArray[2][0] != "&nbsp;" ){
-      alreadyWon = true;
-      alert(cellArray[2][0] + " WON!");
-      toggleVisibility('playagainbtn');
-    }
-    else if(playedCells == 9 && alreadyWon != true){
-      alert("No one won.");
-      toggleVisibility('playagainbtn');
-    }
-  }
-  
+}
 
 
 
@@ -102,11 +99,13 @@ function GameCtrl($scope) {
   $scope.is = function (id) {
       return section == id;
   };
+
+  $scope.resetGame = function(){
+    // Resets game board
+    for (var a = 0; a <= this.gamex.length - 1; a++) {
+      for (var b = 0; b <= this.gamex.length - 1; b++) {
+      this.gamex[a][b] = null;
+      };
+    }
+  }
 }
-
-
-// $scope.resetGame = function(){
-//   var thissound=document.getElementById('playagain');
-//   thissound.play();
-//   alert('Whattup');
-// }

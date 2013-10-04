@@ -8,7 +8,7 @@
 	<input type="button" id="{{bttns[2].id}}" ng-click="section(3); playBall(2);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[2].label}}" />
 </div>
 
-<div id="gameboard" ng-show="is(3)">
+<div id="gameboard" ng-show="is(3) || is(4) ">
 	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in gamex">
 		<div class="cell" id="{{'col' + ($index + 1)}}" ng-repeat="cell in row" ng-click="playCell($parent.$index, $index)">{{gamex[$parent.$index][$index]}}
 		</div>
@@ -20,5 +20,5 @@
 	    <audio id="playagain" src="sounds/playagain.mp3" controls preload="auto" autobuffer></audio>
 	</div>
 
-	<input type="button" class="{'simplebtn': is(4)}" ng-show="is(4)" value="Play Again &rsaquo;" id="playagainbtn" onclick="EvalSound('playagain')">
+	<input type="button" id="{{bttns[3].id}}" ng-click="resetGame()" ng-class="{'simplebtn': is(4)}" ng-show="is(4)" value="{{bttns[3].label}}">
 </div>

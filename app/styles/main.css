@@ -139,9 +139,6 @@ footer a:link, footer a:visited, footer a:hover {
     #gameboard {
         margin-top:15%;
     }
-    .push {
-        height: 20px;
-    }
     footer {
         height: 24px;
     }
@@ -156,9 +153,6 @@ footer a:link, footer a:visited, footer a:hover {
     #gameboard {
         margin-top:15%;
     }
-    .push {
-        height: 20px;
-    }
     footer {
         height: 24px;
     }
@@ -172,9 +166,6 @@ footer a:link, footer a:visited, footer a:hover {
     }
     #gameboard {
         margin-top:15%;
-    }
-    .push {
-        height: 20px;
     }
     footer {
         height: 24px;
