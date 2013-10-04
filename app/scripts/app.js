@@ -151,6 +151,7 @@ $scope.detectHelv = function(){
 
     this.section(2);
     turn = 0;
+    playedCells = 0;
     alreadyWon = false;
   }
 }
