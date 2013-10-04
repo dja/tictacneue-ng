@@ -8,10 +8,11 @@
 	<input type="button" id="{{bttns[2].id}}" ng-click="section(3); playBall(2);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[2].label}}" />
 </div>
 
-<div id="{'gameboard': is(3)}" ng-show="is(3)">
-	<div class="column" id="{{'col' + ($index + 1)}}" ng-repeat="column in gamex">
-		<div class="cell" id="{{'row' + ($index + 1)}}" ng-repeat="cell in column" ng-click="playCell($parent.$index, $index)">&nbsp;
+<div id="gameboard" ng-show="is(3)">
+	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in gamex">
+		<div class="cell" id="{{'col' + ($index + 1)}}" ng-repeat="cell in row" ng-click="playCell($parent.$index, $index)">{{gamex[$parent.$index][$index]}}
 		</div>
+		<div class="clearfix"></div>
 	</div>
 </div>
 <div>

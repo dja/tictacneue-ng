@@ -45,22 +45,12 @@ h1 {
     margin: 0 auto;
     margin-bottom: 30px;
     max-width: 300px;
+    max-height: 300px;
 }
-.column {
-    display: inline-block;
-    height: auto;
-    width: 80px;
+.row {
+    height: 80px;
+    width: 242px;
     padding: none;
-}
-#col1 {
-    border-right: 1px solid #dc145b;
-}
-#col2 {
-    border-right: 1px solid #dc145b;
-    margin-left: -1px;
-}
-#col3 {
-    margin-left: -1px;
 }
 #row1 {
     border-bottom: 1px solid #dc145b;
@@ -70,13 +60,21 @@ h1 {
 }
 #row3 {
 }
+#col1 {
+    border-right: 1px solid #dc145b;
+}
+#col2 {
+    border-right: 1px solid #dc145b;
+}
+#col3 {
+}
 .cell {
     width: 80px;
     height: 80px;
     max-width: 80px;
     max-height: 80px;
     text-align: center;
-
+    float:left;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
     font-weight: 100;
     font-size: 60px;

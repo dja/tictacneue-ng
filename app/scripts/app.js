@@ -34,20 +34,18 @@ function GameCtrl($scope) {
     turn = numPlayr;
   }
 
-  $scope.playCell = function(col, row){
-    alert('playing' + col + " " + row);
-    if (alreadyWon == false && event.target.className.split(" ")[3] != "played") {
+  $scope.playCell = function(row, col){
+    alert('playing' + row + " " + col);
+    if (alreadyWon == false && event.target.className.split(" ")[2] != "played") {
       if (turn % 2 != 0) {
-        // event.target.innerHTML = "X";
         turn++;
         event.target.classList.add('played');
-        this.gamex[col][row] = 'X';
+        this.gamex[row][col] = 'X';
       }
       else {
-        // event.target.innerHTML = "O";
         turn++;
         event.target.classList.add('played');
-        this.gamex[col][row] = 'O';
+        this.gamex[row][col] = 'O';
       }
     }
     else {
