@@ -37,12 +37,13 @@ function GameCtrl($scope) {
   var turn = 1;
   var playedCells = 0;
   var alreadyWon = false;
+  $scope.winorlose = null;
 
 // Font Detection for Helvetica Neue
 $scope.detectHelv = function(){
   var d = new Detector();
   if(d.detect('Helvetica Neue') == false){
-    this.section(5);
+    this.section(6);
   }
 }
 
@@ -66,29 +67,34 @@ $scope.detectHelv = function(){
 // Win Conditions
       for(x=0; x<=2; ++x){
         if(this.cell.value == this.gamex[0][x].value && this.cell.value == this.gamex[1][x].value && this.cell.value == this.gamex[2][x].value && this.cell.value != null){
-          alreadyWon = true;
-          alert(this.cell.value + " WON!");
+        alreadyWon = true;
+        if(this.cell.value == 'X'){ $scope.winorlose = 'X' } else{ $scope.winorlose = 'O' };
         this.section(4);
+        this.section(5);
         }
         if(this.cell.value == this.gamex[x][0].value && this.cell.value == this.gamex[x][1].value && this.cell.value == this.gamex[x][2].value && this.cell.value != null){
-          alreadyWon = true;
-          alert(this.cell.value + " WON!");
+        alreadyWon = true;
+        if(this.cell.value == 'X'){ $scope.winorlose = 'X' } else{ $scope.winorlose = 'O' };
         this.section(4);
+        this.section(5);
         }
       }
       if(this.cell.value == this.gamex[2][0].value && this.cell.value == this.gamex[1][1].value && this.cell.value == this.gamex[0][2].value && this.cell.value != null ){
         alreadyWon = true;
-        alert(this.cell.value + " WON!");
+        if(this.cell.value == 'X'){ $scope.winorlose = 'X' } else{ $scope.winorlose = 'O' };
         this.section(4);
+        this.section(5);
       }
       if(this.cell.value == this.gamex[0][0].value && this.cell.value == this.gamex[1][1].value && this.cell.value == this.gamex[2][2].value && this.cell.value != null ){
         alreadyWon = true;
-        alert(this.cell.value + " WON!");
+        if(this.cell.value == 'X'){ $scope.winorlose = 'X' } else{ $scope.winorlose = 'O' };
         this.section(4);
+        this.section(5);
       }
       else if(alreadyWon == false && playedCells == 9){
-        alert("No one won.");
+        $scope.winorlose = 'NO';
         this.section(4);
+        this.section(5);
       }
     }
     else {
