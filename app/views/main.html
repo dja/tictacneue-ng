@@ -11,7 +11,7 @@
 <div id="gameboard" ng-show="is(3) || is(5)">
 	<div id="winorlose" ng-bind="winorlose" ng-show="is(4)">
 	</div>
-	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in gamex">
+	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in game">
 		<div class="cell" id="{{'col' + ($index + 1)}}" ng-repeat="cell in row" ng-bind="cell.value" ng-click="playCell(cell)">
 		</div>
 		<div class="clearfix"></div>
