@@ -14,16 +14,58 @@ angular.module('newTicApp', ["firebase"])
 
 function GameCtrl($scope, angularFire) {
 
-  $scope.$watch('alreadyWon', function(){
-    if(this.game[0].alreadyWon == true){
-      if(this.cell.value == 'X'){ $scope.game[0].winorlose = 'X WINS!' } else{ $scope.game[0].winorlose = 'O WINS!' };
-      this.section(5);
-    }
-    else if(this.game[0].alreadyWon == false && this.game[0].playedCells == 9){
-      $scope.game[0].winorlose = 'NO WIN';
-      this.section(5);
-    }
-  });
+// Font Detection for Helvetica Neue
+// $scope.detectHelv = function(){
+//   var d = new Detector();
+//   if(d.detect('Helvetica Neue') == false){
+//     this.section(6);
+//   }
+// }
+
+// Shake to Reload on iPhone
+// if (typeof window.DeviceMotionEvent != 'undefined') {
+//     // Shake sensitivity (a lower number is more)
+//     var sensitivity = 50;
+
+//     // Position variables
+//     var x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
+
+//     // Listen to motion events and update the position
+//     window.addEventListener('devicemotion', function (e) {
+//         x1 = e.accelerationIncludingGravity.x;
+//         y1 = e.accelerationIncludingGravity.y;
+//         z1 = e.accelerationIncludingGravity.z;
+//     }, false);
+
+//     // Periodically check the position and fire
+//     // if the change is greater than the sensitivity
+//     setInterval(function () {
+//         var change = Math.abs(x1-x2+y1-y2+z1-z2);
+
+//         if (change > sensitivity) {
+//             var shakeGame = confirm("Do you want to start a new game?");
+//       if (shakeGame == true){
+//         resetGame();
+//       }
+//         }
+
+//         // Update new position
+//         x2 = x1;
+//         y2 = y1;
+//         z2 = z1;
+//     }, 150);
+// }
+
+  // $scope.$watch('alreadyWon', function(){
+  //   if(this.game[0].alreadyWon == true){
+  //     if(this.cell.value == 'X'){ $scope.game[0].winorlose = 'X WINS!' } else{ $scope.game[0].winorlose = 'O WINS!' };
+  //     this.section(5);
+  //   }
+  //   else if(this.game[0].alreadyWon == false && this.game[0].playedCells == 9){
+  //     $scope.game[0].winorlose = 'NO WIN';
+  //     this.section(5);
+  //   }
+  // });
 
   $scope.game = [{
     board: [[{ value: ' '}, { value: ' '}, { value: ' '}],
@@ -32,14 +74,8 @@ function GameCtrl($scope, angularFire) {
     alreadyWon: false,
     turn: 1,
     playedCells: 0,
-    winorlose: null
+    winorlose: null,
   }];
-
-  $scope.player1 = Math.ceil(100 * Math.random());
-  $scope.player2 = Math.ceil(100 * Math.random());
-  if($scope.player2 == $scope.player1){
-    $scope.player2++;
-  }
 
   var database = new Firebase("https://tictacneue.firebaseio.com/game");
   var promise = angularFire(database, $scope, "game");
@@ -52,9 +88,16 @@ function GameCtrl($scope, angularFire) {
       alreadyWon: false,
       turn: 1,
       playedCells: 0,
-      winorlose: null
+      winorlose: null,
     }];
   });
+  var queue = database.child('queue');
+
+  // game[0].player1 = Math.ceil(100 * Math.random());
+  // game[0].player2 = Math.ceil(100 * Math.random());
+  // if(game[0].player2 == game[0].player1){
+  //   game[0].player2++;
+  // };
 
   $scope.bttns = [{
     label: "Start Game ›",
@@ -72,15 +115,6 @@ function GameCtrl($scope, angularFire) {
     label: "Helvetica Neue not Installed. Try Again?",
     id: 'fontdetect'
   }];
-
-
-// Font Detection for Helvetica Neue
-$scope.detectHelv = function(){
-  var d = new Detector();
-  if(d.detect('Helvetica Neue') == false){
-    this.section(6);
-  }
-}
 
   // Setting Player as X or O
   $scope.playBall = function(numPlayr){
@@ -118,41 +152,8 @@ $scope.detectHelv = function(){
     else {
       console.log('Nice try, punk');
     }
-
-// Shake to Reload on iPhone
-    if (typeof window.DeviceMotionEvent != 'undefined') {
-        // Shake sensitivity (a lower number is more)
-        var sensitivity = 50;
-
-        // Position variables
-        var x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
-
-        // Listen to motion events and update the position
-        window.addEventListener('devicemotion', function (e) {
-            x1 = e.accelerationIncludingGravity.x;
-            y1 = e.accelerationIncludingGravity.y;
-            z1 = e.accelerationIncludingGravity.z;
-        }, false);
-
-        // Periodically check the position and fire
-        // if the change is greater than the sensitivity
-        setInterval(function () {
-            var change = Math.abs(x1-x2+y1-y2+z1-z2);
-
-            if (change > sensitivity) {
-                var shakeGame = confirm("Do you want to start a new game?");
-          if (shakeGame == true){
-            window.location.reload();
-          }
-            }
-
-            // Update new position
-            x2 = x1;
-            y2 = y1;
-            z2 = z1;
-        }, 150);
-    }
 }
+
   // Switch views between hidden and visible elements
   var section = 1;
   
