@@ -14,21 +14,26 @@ angular.module('newTicApp', ["firebase"])
 
 function GameCtrl($scope, angularFire) {
 
-  $scope.$watch('game', function(){
-    if(alreadyWon == true){
-      if(this.cell.value == 'X'){ $scope.winorlose = 'X WINS!' } else{ $scope.winorlose = 'O WINS!' };
+  $scope.$watch('alreadyWon', function(){
+    if(this.game[0].alreadyWon == true){
+      if(this.cell.value == 'X'){ $scope.game[0].winorlose = 'X WINS!' } else{ $scope.game[0].winorlose = 'O WINS!' };
       this.section(5);
     }
-    else if(alreadyWon == false && playedCells == 9){
-      $scope.winorlose = 'NO WIN';
+    else if(this.game[0].alreadyWon == false && this.game[0].playedCells == 9){
+      $scope.game[0].winorlose = 'NO WIN';
       this.section(5);
     }
   });
 
-
-  $scope.board = [[{ value: ' '}, { value: ' '}, { value: ' '}],
-                  [{ value: ' '}, { value: ' '}, { value: ' '}],
-                  [{ value: ' '}, { value: ' '}, { value: ' '}]];
+  $scope.game = [{
+    board: [[{ value: ' '}, { value: ' '}, { value: ' '}],
+            [{ value: ' '}, { value: ' '}, { value: ' '}],
+            [{ value: ' '}, { value: ' '}, { value: ' '}]],
+    alreadyWon: false,
+    turn: 1,
+    playedCells: 0,
+    winorlose: null
+  }];
 
   $scope.player1 = Math.ceil(100 * Math.random());
   $scope.player2 = Math.ceil(100 * Math.random());
@@ -37,12 +42,18 @@ function GameCtrl($scope, angularFire) {
   }
 
   var database = new Firebase("https://tictacneue.firebaseio.com/game");
-  var promise = angularFire(database, $scope, "board");
+  var promise = angularFire(database, $scope, "game");
 
   promise.then ( function() {
-    $scope.board = [[{ value: ' '}, { value: ' '}, { value: ' '}],
-                  [{ value: ' '}, { value: ' '}, { value: ' '}],
-                  [{ value: ' '}, { value: ' '}, { value: ' '}]];
+    $scope.game = [{
+      board: [[{ value: ' '}, { value: ' '}, { value: ' '}],
+              [{ value: ' '}, { value: ' '}, { value: ' '}],
+              [{ value: ' '}, { value: ' '}, { value: ' '}]],
+      alreadyWon: false,
+      turn: 1,
+      playedCells: 0,
+      winorlose: null
+    }];
   });
 
   $scope.bttns = [{
@@ -62,10 +73,6 @@ function GameCtrl($scope, angularFire) {
     id: 'fontdetect'
   }];
 
-  var turn = 1;
-  var playedCells = 0;
-  var alreadyWon = false;
-  $scope.winorlose = null;
 
 // Font Detection for Helvetica Neue
 $scope.detectHelv = function(){
@@ -77,35 +84,35 @@ $scope.detectHelv = function(){
 
   // Setting Player as X or O
   $scope.playBall = function(numPlayr){
-    turn = numPlayr;
+    this.game[0].turn = numPlayr;
   }
 
   $scope.playCell = function(cell){
-    if (alreadyWon == false && this.cell.value != 'X' && this.cell.value != 'O') {
-      if (turn % 2 != 0) {
-        turn++;
-        playedCells++;
+    if (this.game[0].alreadyWon == false && this.cell.value != 'X' && this.cell.value != 'O') {
+      if (this.game[0].turn % 2 != 0) {
+        this.game[0].turn++;
+        this.game[0].playedCells++;
         this.cell.value = 'X';
       }
       else {
-        turn++;
-        playedCells++;
+        this.game[0].turn++;
+        this.game[0].playedCells++;
         this.cell.value = 'O';
       }
       // Win Conditions
       for(x=0; x<=2; ++x){
-        if(this.cell.value == this.board[0][x].value && this.cell.value == this.board[1][x].value && this.cell.value == this.board[2][x].value && this.cell.value != null){
-        alreadyWon = true;
+        if(this.cell.value == this.game[0].board[0][x].value && this.cell.value == this.game[0].board[1][x].value && this.cell.value == this.game[0].board[2][x].value && this.cell.value != null){
+        this.game[0].alreadyWon = true;
         }
-        if(this.cell.value == this.board[x][0].value && this.cell.value == this.board[x][1].value && this.cell.value == this.board[x][2].value && this.cell.value != null){
-        alreadyWon = true;
+        if(this.cell.value == this.game[0].board[x][0].value && this.cell.value == this.game[0].board[x][1].value && this.cell.value == this.game[0].board[x][2].value && this.cell.value != null){
+        this.game[0].alreadyWon = true;
         }
       }
-      if(this.cell.value == this.board[2][0].value && this.cell.value == this.board[1][1].value && this.cell.value == this.board[0][2].value && this.cell.value != null ){
-        alreadyWon = true;
+      if(this.cell.value == this.game[0].board[2][0].value && this.cell.value == this.game[0].board[1][1].value && this.cell.value == this.game[0].board[0][2].value && this.cell.value != null ){
+        this.game[0].alreadyWon = true;
       }
-      if(this.cell.value == this.board[0][0].value && this.cell.value == this.board[1][1].value && this.cell.value == this.board[2][2].value && this.cell.value != null ){
-        alreadyWon = true;
+      if(this.cell.value == this.game[0].board[0][0].value && this.cell.value == this.game[0].board[1][1].value && this.cell.value == this.game[0].board[2][2].value && this.cell.value != null ){
+        this.game[0].alreadyWon = true;
       }
     }
     else {
@@ -160,15 +167,15 @@ $scope.detectHelv = function(){
 // Reset Game
   $scope.resetGame = function(){
     // Resets game board
-    for (var a = 0; a <= this.board.length - 1; a++) {
-      for (var b = 0; b <= this.board.length - 1; b++) {
-        this.board[a][b].value = ' ';
+    for (var a = 0; a <= this.game[0].board.length - 1; a++) {
+      for (var b = 0; b <= this.game[0].board.length - 1; b++) {
+        this.game[0].board[a][b].value = ' ';
       };
     };
 
     this.section(2);
-    turn = 0;
-    playedCells = 0;
-    alreadyWon = false;
+    this.game[0].turn = 0;
+    this.game[0].playedCells = 0;
+    this.game[0].alreadyWon = false;
   }
 }

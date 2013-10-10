@@ -9,9 +9,9 @@
 </div>
 
 <div id="gameboard" ng-show="is(3) || is(5)">
-	<div id="winorlose" ng-bind="winorlose" ng-show="is(5)">
+	<div id="game[0].winorlose" ng-bind="game[0].winorlose" ng-show="is(5)">
 	</div>
-	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in board">
+	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in game[0].board">
 		<div class="cell" id="{{'col' + ($index + 1)}}" ng-repeat="cell in row" ng-bind="cell.value" ng-click="playCell(cell)">
 		</div>
 		<div class="clearfix"></div>
