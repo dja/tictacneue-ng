@@ -13,7 +13,20 @@ angular.module('newTicApp', ["firebase"])
   });
 
 function GameCtrl($scope, angularFire) {
-  $scope.game = [[{ value: ' '}, { value: ' '}, { value: ' '}],
+
+  $scope.$watch('game', function(){
+    if(alreadyWon == true){
+      if(this.cell.value == 'X'){ $scope.winorlose = 'X WINS!' } else{ $scope.winorlose = 'O WINS!' };
+      this.section(5);
+    }
+    else if(alreadyWon == false && playedCells == 9){
+      $scope.winorlose = 'NO WIN';
+      this.section(5);
+    }
+  });
+
+
+  $scope.board = [[{ value: ' '}, { value: ' '}, { value: ' '}],
                   [{ value: ' '}, { value: ' '}, { value: ' '}],
                   [{ value: ' '}, { value: ' '}, { value: ' '}]];
 
@@ -23,11 +36,11 @@ function GameCtrl($scope, angularFire) {
     $scope.player2++;
   }
 
-  var database = new Firebase("https://tictacneue.firebaseio.com/game/");
-  var promise = angularFire(database, $scope, "game");
+  var database = new Firebase("https://tictacneue.firebaseio.com/game");
+  var promise = angularFire(database, $scope, "board");
 
   promise.then ( function() {
-    $scope.game = [[{ value: ' '}, { value: ' '}, { value: ' '}],
+    $scope.board = [[{ value: ' '}, { value: ' '}, { value: ' '}],
                   [{ value: ' '}, { value: ' '}, { value: ' '}],
                   [{ value: ' '}, { value: ' '}, { value: ' '}]];
   });
@@ -79,37 +92,20 @@ $scope.detectHelv = function(){
         playedCells++;
         this.cell.value = 'O';
       }
-// Win Conditions
+      // Win Conditions
       for(x=0; x<=2; ++x){
-        if(this.cell.value == this.game[0][x].value && this.cell.value == this.game[1][x].value && this.cell.value == this.game[2][x].value && this.cell.value != null){
+        if(this.cell.value == this.board[0][x].value && this.cell.value == this.board[1][x].value && this.cell.value == this.board[2][x].value && this.cell.value != null){
         alreadyWon = true;
-        if(this.cell.value == 'X'){ $scope.winorlose = 'X' } else{ $scope.winorlose = 'O' };
-        this.section(4);
-        this.section(5);
         }
-        if(this.cell.value == this.game[x][0].value && this.cell.value == this.game[x][1].value && this.cell.value == this.game[x][2].value && this.cell.value != null){
+        if(this.cell.value == this.board[x][0].value && this.cell.value == this.board[x][1].value && this.cell.value == this.board[x][2].value && this.cell.value != null){
         alreadyWon = true;
-        if(this.cell.value == 'X'){ $scope.winorlose = 'X' } else{ $scope.winorlose = 'O' };
-        this.section(4);
-        this.section(5);
         }
       }
-      if(this.cell.value == this.game[2][0].value && this.cell.value == this.game[1][1].value && this.cell.value == this.game[0][2].value && this.cell.value != null ){
+      if(this.cell.value == this.board[2][0].value && this.cell.value == this.board[1][1].value && this.cell.value == this.board[0][2].value && this.cell.value != null ){
         alreadyWon = true;
-        if(this.cell.value == 'X'){ $scope.winorlose = 'X' } else{ $scope.winorlose = 'O' };
-        this.section(4);
-        this.section(5);
       }
-      if(this.cell.value == this.game[0][0].value && this.cell.value == this.game[1][1].value && this.cell.value == this.game[2][2].value && this.cell.value != null ){
+      if(this.cell.value == this.board[0][0].value && this.cell.value == this.board[1][1].value && this.cell.value == this.board[2][2].value && this.cell.value != null ){
         alreadyWon = true;
-        if(this.cell.value == 'X'){ $scope.winorlose = 'X' } else{ $scope.winorlose = 'O' };
-        this.section(4);
-        this.section(5);
-      }
-      else if(alreadyWon == false && playedCells == 9){
-        $scope.winorlose = 'NO';
-        this.section(4);
-        this.section(5);
       }
     }
     else {
@@ -164,9 +160,9 @@ $scope.detectHelv = function(){
 // Reset Game
   $scope.resetGame = function(){
     // Resets game board
-    for (var a = 0; a <= this.game.length - 1; a++) {
-      for (var b = 0; b <= this.game.length - 1; b++) {
-        this.game[a][b].value = ' ';
+    for (var a = 0; a <= this.board.length - 1; a++) {
+      for (var b = 0; b <= this.board.length - 1; b++) {
+        this.board[a][b].value = ' ';
       };
     };
 

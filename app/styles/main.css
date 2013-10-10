@@ -55,9 +55,10 @@ h1 {
     font-weight: 100;
     background-color: rgba(0,0,0,0.5);
     z-index: 100;
-    font-size: 100px;
+    font-size: 103px;
     text-align: center;
     margin-left: 28px;
+    color: rgba(255,255,255,0.9);
 }
 .row {
     height: 80px;
@@ -135,10 +136,17 @@ footer {
     bottom: 0;
     position: fixed;
 }
-footer a:link, footer a:visited, footer a:hover {
+footer a, footer a:link, footer a:visited, footer a:hover {
     color: #efefef;
     font-size: 30px;
     text-decoration: none;
+}
+#galogo {
+    float:right;
+    margin-right: 40px;
+}
+img#galogo {
+    width: 40px;
 }
 
 @media screen and (device-aspect-ratio: 2/3) {
