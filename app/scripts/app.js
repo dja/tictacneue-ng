@@ -12,86 +12,59 @@ angular.module('newTicApp', ["firebase"])
       });
   });
 
-function GameCtrl($scope, angularFire) {
+angular.module('newTicApp').controller('GameCtrl', function ($scope, angularFire) {
 
-// Font Detection for Helvetica Neue
-// $scope.detectHelv = function(){
-//   var d = new Detector();
-//   if(d.detect('Helvetica Neue') == false){
-//     this.section(6);
-//   }
-// }
+  $scope.games = [];
+  $scope.queue = {};
 
-// Shake to Reload on iPhone
-// if (typeof window.DeviceMotionEvent != 'undefined') {
-//     // Shake sensitivity (a lower number is more)
-//     var sensitivity = 50;
+  var games = new Firebase("https://tictacneue.firebaseio.com/games");
+  angularFire(games, $scope, "games").then(function(){
 
-//     // Position variables
-//     var x1 = 0, y1 = 0, z1 = 0, x2 = 0, y2 = 0, z2 = 0;
+    var queue = new Firebase("https://tictacneue.firebaseio.com/queue");
+    angularFire(queue, $scope, "queue").then(function (){
+      if($scope.queue.gameId == undefined){
 
-//     // Listen to motion events and update the position
-//     window.addEventListener('devicemotion', function (e) {
-//         x1 = e.accelerationIncludingGravity.x;
-//         y1 = e.accelerationIncludingGravity.y;
-//         z1 = e.accelerationIncludingGravity.z;
-//     }, false);
+        $scope.player = "p1";
 
-//     // Periodically check the position and fire
-//     // if the change is greater than the sensitivity
-//     setInterval(function () {
-//         var change = Math.abs(x1-x2+y1-y2+z1-z2);
+        // create game
+        var newGame = {
+          board: [[{ value: ' '}, { value: ' '}, { value: ' '}],
+                  [{ value: ' '}, { value: ' '}, { value: ' '}],
+                  [{ value: ' '}, { value: ' '}, { value: ' '}]],
+          alreadyWon: false,
+          turn: 1,
+          playedCells: 0,
+          winorlose: null,
+          iTurn: 1
+        };
 
-//         if (change > sensitivity) {
-//             var shakeGame = confirm("Do you want to start a new game?");
-//       if (shakeGame == true){
-//         resetGame();
-//       }
-//         }
+        $scope.gameId = $scope.games.push(newGame) - 1;
+        $scope.queue.gameId = $scope.gameId;
+      }
 
-//         // Update new position
-//         x2 = x1;
-//         y2 = y1;
-//         z2 = z1;
-//     }, 150);
-// }
+      else {
+
+        $scope.player = "p2";
+        // read game id from queue
+
+        // clear the queue
+        $scope.gameId = $scope.queue.gameId;
+        $scope.queue = {};
+      }
+
+      });
+    });
 
   // $scope.$watch('alreadyWon', function(){
-  //   if(this.game[0].alreadyWon == true){
-  //     if(this.cell.value == 'X'){ $scope.game[0].winorlose = 'X WINS!' } else{ $scope.game[0].winorlose = 'O WINS!' };
-  //     this.section(5);
+  //   if($scope.game[0].alreadyWon == true){
+  //     if(cell.value == 'X'){ $scope.game[0].winorlose = 'X WINS!' } else{ $scope.game[0].winorlose = 'O WINS!' };
+  //     $scope.section(5);
   //   }
-  //   else if(this.game[0].alreadyWon == false && this.game[0].playedCells == 9){
+  //   else if($scope.game[0].alreadyWon == false && $scope.game[0].playedCells == 9){
   //     $scope.game[0].winorlose = 'NO WIN';
-  //     this.section(5);
+  //     $scope.section(5);
   //   }
   // });
-
-  $scope.game = [{
-    board: [[{ value: ' '}, { value: ' '}, { value: ' '}],
-            [{ value: ' '}, { value: ' '}, { value: ' '}],
-            [{ value: ' '}, { value: ' '}, { value: ' '}]],
-    alreadyWon: false,
-    turn: 1,
-    playedCells: 0,
-    winorlose: null,
-  }];
-
-  var database = new Firebase("https://tictacneue.firebaseio.com/game");
-  var promise = angularFire(database, $scope, "game");
-
-  promise.then ( function() {
-    $scope.game = [{
-      board: [[{ value: ' '}, { value: ' '}, { value: ' '}],
-              [{ value: ' '}, { value: ' '}, { value: ' '}],
-              [{ value: ' '}, { value: ' '}, { value: ' '}]],
-      alreadyWon: false,
-      turn: 1,
-      playedCells: 0,
-      winorlose: null,
-    }];
-  });
-  var queue = database.child('queue');
 
   // game[0].player1 = Math.ceil(100 * Math.random());
   // game[0].player2 = Math.ceil(100 * Math.random());
@@ -111,48 +84,81 @@ function GameCtrl($scope, angularFire) {
   }, {
     label: "Play Again ›",
     id: 'playagainbtn'
-  }, {
-    label: "Helvetica Neue not Installed. Try Again?",
-    id: 'fontdetect'
   }];
+
+  // Are you player 1 or 2?
+  $scope.setPlayr = function(){
+    if($scope.player == 'p1'){
+      $scope.section(2);
+    }
+    else if($scope.player == 'p2'){
+      $scope.section(3);
+    }
+  }
 
   // Setting Player as X or O
   $scope.playBall = function(numPlayr){
-    this.game[0].turn = numPlayr;
+    $scope.games[$scope.gameId].turn = numPlayr;
+    $scope.section(3);
+  }
+
+  $scope.setX = function(cell){
+    $scope.games[$scope.gameId].turn++;
+    $scope.games[$scope.gameId].playedCells++;
+    cell.value = 'X';
+  }
+ $scope.setO = function(cell){
+    $scope.games[$scope.gameId].turn++;
+    $scope.games[$scope.gameId].playedCells++;
+    cell.value = 'O';
   }
 
   $scope.playCell = function(cell){
-    if (this.game[0].alreadyWon == false && this.cell.value != 'X' && this.cell.value != 'O') {
-      if (this.game[0].turn % 2 != 0) {
-        this.game[0].turn++;
-        this.game[0].playedCells++;
-        this.cell.value = 'X';
+    if ($scope.games[$scope.gameId].alreadyWon == false && cell.value != 'X' && cell.value != 'O') {
+      if ($scope.player == 'p1' && $scope.games[$scope.gameId].iTurn == 1){
+        if ($scope.games[$scope.gameId].turn % 2 != 0) {
+          alert($scope.player + " if " + $scope.games[$scope.gameId].turn);
+          $scope.games[$scope.gameId].iTurn = 2;
+          $scope.setX(cell);
+        }
+        else if ($scope.games[$scope.gameId].turn % 2 == 0) {
+          alert($scope.player + " else " + $scope.games[$scope.gameId].turn);
+          $scope.games[$scope.gameId].iTurn = 2;
+          $scope.setO(cell);
+        }
       }
-      else {
-        this.game[0].turn++;
-        this.game[0].playedCells++;
-        this.cell.value = 'O';
+      else if($scope.player == 'p2' && $scope.games[$scope.gameId].iTurn == 2){
+        if ($scope.games[$scope.gameId].turn % 2 == 0) {
+          alert($scope.player + " if2 " + $scope.games[$scope.gameId].turn);
+          $scope.games[$scope.gameId].iTurn = 1;
+          $scope.setX(cell);
+        }
+        else if($scope.games[$scope.gameId].turn % 2 != 0){
+          alert($scope.player + " else2 " + $scope.games[$scope.gameId].turn);
+          $scope.games[$scope.gameId].iTurn = 1;
+          $scope.setO(cell);
+        }        
       }
       // Win Conditions
-      for(x=0; x<=2; ++x){
-        if(this.cell.value == this.game[0].board[0][x].value && this.cell.value == this.game[0].board[1][x].value && this.cell.value == this.game[0].board[2][x].value && this.cell.value != null){
-        this.game[0].alreadyWon = true;
+      for(var x=0; x<=2; ++x){
+        if(cell.value == $scope.games[$scope.gameId].board[0][x].value && cell.value == $scope.games[$scope.gameId].board[1][x].value && cell.value == $scope.games[$scope.gameId].board[2][x].value && cell.value != null){
+        $scope.games[$scope.gameId].alreadyWon = true;
         }
-        if(this.cell.value == this.game[0].board[x][0].value && this.cell.value == this.game[0].board[x][1].value && this.cell.value == this.game[0].board[x][2].value && this.cell.value != null){
-        this.game[0].alreadyWon = true;
+        if(cell.value == $scope.games[$scope.gameId].board[x][0].value && cell.value == $scope.games[$scope.gameId].board[x][1].value && cell.value == $scope.games[$scope.gameId].board[x][2].value && cell.value != null){
+        $scope.games[$scope.gameId].alreadyWon = true;
         }
       }
-      if(this.cell.value == this.game[0].board[2][0].value && this.cell.value == this.game[0].board[1][1].value && this.cell.value == this.game[0].board[0][2].value && this.cell.value != null ){
-        this.game[0].alreadyWon = true;
+      if(cell.value == $scope.games[$scope.gameId].board[2][0].value && cell.value == $scope.games[$scope.gameId].board[1][1].value && cell.value == $scope.games[$scope.gameId].board[0][2].value && cell.value != null ){
+        $scope.games[$scope.gameId].alreadyWon = true;
       }
-      if(this.cell.value == this.game[0].board[0][0].value && this.cell.value == this.game[0].board[1][1].value && this.cell.value == this.game[0].board[2][2].value && this.cell.value != null ){
-        this.game[0].alreadyWon = true;
+      if(cell.value == $scope.games[$scope.gameId].board[0][0].value && cell.value == $scope.games[$scope.gameId].board[1][1].value && cell.value == $scope.games[$scope.gameId].board[2][2].value && cell.value != null ){
+        $scope.games[$scope.gameId].alreadyWon = true;
       }
     }
     else {
       console.log('Nice try, punk');
     }
-}
+  }
 
   // Switch views between hidden and visible elements
   var section = 1;
@@ -168,15 +174,15 @@ function GameCtrl($scope, angularFire) {
 // Reset Game
   $scope.resetGame = function(){
     // Resets game board
-    for (var a = 0; a <= this.game[0].board.length - 1; a++) {
-      for (var b = 0; b <= this.game[0].board.length - 1; b++) {
-        this.game[0].board[a][b].value = ' ';
+    for (var a = 0; a <= $scope.games[$scope.gameId].board.length - 1; a++) {
+      for (var b = 0; b <= $scope.games[$scope.gameId].board.length - 1; b++) {
+        $scope.games[$scope.gameId].board[a][b].value = ' ';
       };
     };
 
-    this.section(2);
-    this.game[0].turn = 0;
-    this.game[0].playedCells = 0;
-    this.game[0].alreadyWon = false;
+    $scope.section(2);
+    $scope.games[$scope.gameId].turn = 0;
+    $scope.games[$scope.gameId].playedCells = 0;
+    $scope.games[$scope.gameId].alreadyWon = false;
   }
-}
+});
