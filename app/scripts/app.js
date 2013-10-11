@@ -27,19 +27,19 @@ $.supersized({
 switch(rand_style_no)
 {
   case 1:
-    document.write('<link rel="stylesheet" href="styles/1.css" type="text/css">');
+    document.write('<!-- build:css(.tmp) styles/1.css --><link rel="stylesheet" href="styles/1.css" type="text/css"><!-- endbuild -->');
     break;
   case 2:
-    document.write('<link rel="stylesheet" href="styles/2.css" type="text/css">');
+    document.write('<!-- build:css(.tmp) styles/2.css --><link rel="stylesheet" href="styles/2.css" type="text/css"><!-- endbuild -->');
     break;
   case 3:
-    document.write('<link rel="stylesheet" href="styles/3.css" type="text/css">');
+    document.write('<!-- build:css(.tmp) styles/3.css --><link rel="stylesheet" href="styles/3.css" type="text/css"><!-- endbuild -->');
     break;
   case 4:
-    document.write('<link rel="stylesheet" href="styles/4.css" type="text/css">');
+    document.write('<!-- build:css(.tmp) styles/4.css --><link rel="stylesheet" href="styles/4.css" type="text/css"><!-- endbuild -->');
     break;
   default:
-    document.write('<link rel="stylesheet" href="styles/main.css" type="text/css">');
+    document.write('<!-- build:css(.tmp) styles/main.css --><link rel="stylesheet" href="styles/main.css" type="text/css"><!-- endbuild -->');
     break;
 }
 
