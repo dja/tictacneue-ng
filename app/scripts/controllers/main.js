@@ -67,19 +67,7 @@ angular.module("newTicApp")
   }];
 
   var database = new Firebase("https://tictacneue.firebaseio.com/game");
-  var promise = angularFire(database, $scope, "game");
 
-  promise.then ( function() {
-    $scope.game = [{
-      board: [[{ value: ' '}, { value: ' '}, { value: ' '}],
-              [{ value: ' '}, { value: ' '}, { value: ' '}],
-              [{ value: ' '}, { value: ' '}, { value: ' '}]],
-      alreadyWon: false,
-      turn: 1,
-      playedCells: 0,
-      winorlose: null,
-    }];
-  });
   var queue = database.child('queue');
 
   // game[0].player1 = Math.ceil(100 * Math.random());
