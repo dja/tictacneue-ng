@@ -134,7 +134,7 @@ function GameCtrl($scope, angularFire) {
         this.cell.value = 'O';
       }
       // Win Conditions
-      for(x=0; x<=2; ++x){
+      for(var x=0; x<=2; ++x){
         if(this.cell.value == this.game[0].board[0][x].value && this.cell.value == this.game[0].board[1][x].value && this.cell.value == this.game[0].board[2][x].value && this.cell.value != null){
         this.game[0].alreadyWon = true;
         }
