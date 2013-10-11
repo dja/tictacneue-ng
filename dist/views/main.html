@@ -1,11 +1,11 @@
 <div><input type="button" id="{{bttns[3].id}}" class="{'simplebtn': is(6)}" ng-show="is(6)" value="{{bttns[4].label}}" onclick="window.location.reload()"></div>
 
 <div class="menu" id="start">
-	<input type="button" id="{{bttns[0].id}}" ng-click="section(2)" ng-class="{'simplebtn': is(1)}" ng-show="is(1)" value="{{bttns[0].label}}">
+	<input type="button" id="{{bttns[0].id}}" ng-click="section(2)" ng-class="{'simplebtn': is(1)}" ng-show="is(1)" ng-bind="bttns[0].label">
 	
-	<input type="button" id="{{bttns[1].id}}" ng-click="section(3); playBall(1);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[1].label}}">
+	<input type="button" id="{{bttns[1].id}}" ng-click="section(3); playBall(1);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" ng-bind="bttns[1].label">
 	<br>
-	<input type="button" id="{{bttns[2].id}}" ng-click="section(3); playBall(2);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[2].label}}">
+	<input type="button" id="{{bttns[2].id}}" ng-click="section(3); playBall(2);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" ng-bind="bttns[2].label">
 </div>
 
 <div id="gameboard" ng-show="is(3) || is(5)">
@@ -22,5 +22,5 @@
 	    <audio id="playagain" src="sounds/playagain.mp3" controls="" preload="auto" autobuffer=""></audio>
 	</div>
 
-	<input type="button" id="{{bttns[3].id}}" ng-click="resetGame()" ng-class="{'simplebtn': is(5)}" ng-show="is(5)" value="{{bttns[3].label}}">
+	<input type="button" id="{{bttns[3].id}}" ng-click="resetGame()" ng-class="{'simplebtn': is(5)}" ng-show="is(5)" ng-bind="bttns[3].label">
 </div>
