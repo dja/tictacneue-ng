@@ -24,43 +24,6 @@
 <link rel="apple-touch-icon" sizes="120x120" href="img/touch-icon/touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon/touch-icon-ipad-retina.png" />
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/controllers/supersized.core.3.2.1.min.js"></script>
-<script type="text/javascript" src="scripts/controllers/fontdetect.js"></script>
-
-<script type="text/javascript">
-  var rand_style_no = Math.ceil(5 * Math.random());
-
-jQuery(function($){
-
-$.supersized({
-  slides  :   [ {image : 'img/'+rand_style_no+'bg.jpg', title : ''} ]
-});
-});
-
-switch(rand_style_no)
-{
-  case 1:
-    document.write('<!-- build:css(.tmp) styles/1.css --><link rel="stylesheet" href="styles/1.css" type="text/css"><!-- endbuild -->');
-    break;
-  case 2:
-    document.write('<!-- build:css(.tmp) styles/2.css --><link rel="stylesheet" href="styles/2.css" type="text/css"><!-- endbuild -->');
-    break;
-  case 3:
-    document.write('<!-- build:css(.tmp) styles/3.css --><link rel="stylesheet" href="styles/3.css" type="text/css"><!-- endbuild -->');
-    break;
-  case 4:
-    document.write('<!-- build:css(.tmp) styles/4.css --><link rel="stylesheet" href="styles/4.css" type="text/css"><!-- endbuild -->');
-    break;
-  default:
-    document.write('<!-- build:css(.tmp) styles/main.css --><link rel="stylesheet" href="styles/main.css" type="text/css"><!-- endbuild -->');
-    break;
-}
-
-
-</script>
-
-
 
 </head>
   <body ng-app="newTicApp" ng-controller="GameCtrl">
@@ -93,6 +56,8 @@ switch(rand_style_no)
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="scripts/controllers/supersized.core.3.2.1.min.js"></script>
         <!-- endbuild -->
 
 <script>
