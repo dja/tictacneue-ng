@@ -24,7 +24,8 @@ angular.module("newTicApp")
           turn: 1,
           playedCells: 0,
           winorlose: null,
-          iTurn: 1
+          iTurn: true,
+          p1: 'X'
         };
 
         $scope.gameId = $scope.games.push(newGame) - 1;
@@ -88,6 +89,9 @@ angular.module("newTicApp")
   // Setting Player as X or O
   $scope.playBall = function(numPlayr){
     $scope.games[$scope.gameId].turn = numPlayr;
+    if(numPlayr = 2){
+      $scope.games[$scope.gameId].p1 = 'O';
+    }
     $scope.section(3);
   }
 
@@ -104,28 +108,28 @@ angular.module("newTicApp")
 
   $scope.playCell = function(cell){
     if ($scope.games[$scope.gameId].alreadyWon == false && cell.value != 'X' && cell.value != 'O') {
-      if ($scope.player == 'p1' && $scope.games[$scope.gameId].iTurn == 1){
-        if ($scope.games[$scope.gameId].turn % 2 != 0) {
-          alert($scope.player + " if " + $scope.games[$scope.gameId].turn);
-          $scope.games[$scope.gameId].iTurn = 2;
+      while($scope.player == 'p1'){
+        if ($scope.games[$scope.gameId].turn % 2 != 0 && $scope.games[$scope.gameId].iTurn == true) {
+          // alert($scope.player + " if " + $scope.games[$scope.gameId].turn);
           $scope.setX(cell);
+          $scope.games[$scope.gameId].iTurn = false;
         }
-        else if ($scope.games[$scope.gameId].turn % 2 == 0) {
-          alert($scope.player + " else " + $scope.games[$scope.gameId].turn);
-          $scope.games[$scope.gameId].iTurn = 2;
+        else if ($scope.games[$scope.gameId].turn % 2 == 0 && $scope.games[$scope.gameId].iTurn == true){
+          // alert($scope.player + " else " + $scope.games[$scope.gameId].turn);
           $scope.setO(cell);
+          $scope.games[$scope.gameId].iTurn = false;
         }
       }
-      else if($scope.player == 'p2' && $scope.games[$scope.gameId].iTurn == 2){
-        if ($scope.games[$scope.gameId].turn % 2 == 0) {
-          alert($scope.player + " if2 " + $scope.games[$scope.gameId].turn);
-          $scope.games[$scope.gameId].iTurn = 1;
+      while($scope.player == 'p2'){
+        if ($scope.games[$scope.gameId].turn % 2 == 0 && $scope.games[$scope.gameId].iTurn == false) {
+          // alert($scope.player + " if2 " + $scope.games[$scope.gameId].turn);
           $scope.setX(cell);
+          $scope.games[$scope.gameId].iTurn = true;
         }
-        else if($scope.games[$scope.gameId].turn % 2 != 0){
-          alert($scope.player + " else2 " + $scope.games[$scope.gameId].turn);
-          $scope.games[$scope.gameId].iTurn = 1;
+        else if ($scope.games[$scope.gameId].turn % 2 != 0 && $scope.games[$scope.gameId].iTurn == false) {
+          // alert($scope.player + " else2 " + $scope.games[$scope.gameId].turn);
           $scope.setO(cell);
+          $scope.games[$scope.gameId].iTurn = true;
         }        
       }
       // Win Conditions
