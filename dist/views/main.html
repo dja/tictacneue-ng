@@ -1,17 +1,17 @@
 <div><input type="button" id="{{bttns[3].id}}" class="{'simplebtn': is(6)}" ng-show="is(6)" value="{{bttns[4].label}}" onclick="window.location.reload()"></div>
 
 <div class="menu" id="start">
-	<input type="button" id="{{bttns[0].id}}" ng-click="section(2)" ng-class="{'simplebtn': is(1)}" ng-show="is(1)" value="{{bttns[0].label}}">
+	<input type="button" id="{{bttns[0].id}}" ng-click="setPlayr();" ng-class="{'simplebtn': is(1)}" ng-show="is(1)" value="{{bttns[0].label}}">
 	
-	<input type="button" id="{{bttns[1].id}}" ng-click="section(3); playBall(1);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[1].label}}">
+	<input type="button" id="{{bttns[1].id}}" ng-click="playBall(1);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[1].label}}">
 	<br>
-	<input type="button" id="{{bttns[2].id}}" ng-click="section(3); playBall(2);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[2].label}}">
+	<input type="button" id="{{bttns[2].id}}" ng-click="playBall(2);" ng-class="{'simplebtn': is(2)}" ng-show="is(2)" value="{{bttns[2].label}}">
 </div>
 
 <div id="gameboard" ng-show="is(3) || is(5)">
-	<div id="game[0].winorlose" ng-bind="game[0].winorlose" ng-show="is(5)">
+	<div id="games[gameId].winorlose" ng-bind="games[gameId].winorlose" ng-show="is(5)">
 	</div>
-	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in game[0].board">
+	<div class="row" id="{{'row' + ($index + 1)}}" ng-repeat="row in games[gameId].board">
 		<div class="cell" id="{{'col' + ($index + 1)}}" ng-repeat="cell in row" ng-bind="cell.value" ng-click="playCell(cell)">
 		</div>
 		<div class="clearfix"></div>
