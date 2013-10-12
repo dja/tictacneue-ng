@@ -1,0 +1,31 @@
+header {
+	border-top: 2px solid #df0a0a;
+}
+a {
+	color: #df0a0a;
+}
+h1 {
+	color: #df0a0a;
+}
+.cell {
+	color: #df0a0a;
+}
+.simplebtn {
+	color: #df0a0a;
+}
+#col1 {
+    border-right: 1px solid #df0a0a;
+}
+#col2 {
+    border-right: 1px solid #df0a0a;
+}
+#col3 {
+}
+#row1 {
+    border-bottom: 1px solid #df0a0a;
+}
+#row2 {
+    border-bottom: 1px solid #df0a0a;
+}
+#row3 {
+}
